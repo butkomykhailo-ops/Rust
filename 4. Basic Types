@@ -1,0 +1,385 @@
+4.1 Numbers
+
+Integer
+1.🌟
+fn main() {
+    let x: i32 = 5;
+    let y: u32 = 5;
+
+    let z = x as u32 + y;
+    println!("{}", z);
+}
+
+2.🌟
+
+// Fill the blank
+fn main() {
+    let v: u16 = 38_u8 as u16;
+
+    println!("Success!");
+}
+
+3.🌟🌟🌟
+
+// Fill the blank
+fn main() {
+    let v: u16 = 38_u8 as u16;
+
+    println!("Success!");
+}
+
+4.🌟🌟
+fn main() {
+    let max_i8 = i8::MAX;
+    let max_u8 = u8::MAX;
+
+    assert_eq!(max_i8, 127);
+    assert_eq!(max_u8, 255);
+
+    println!("Success!");
+}
+
+5.🌟🌟
+
+fn main() {
+    let a = 10;
+    let b = 3;
+
+    assert_eq!(a + b, 13);
+    assert_eq!(a - b, 7);
+    assert_eq!(a * b, 30);
+    assert_eq!(a / b, 3);
+    assert_eq!(a % b, 1);
+
+    println!("Success!");
+}
+
+6.🌟🌟
+fn main() {
+    let a = true;
+    let b = false;
+
+    assert!(a && !b);
+    assert!(a || b);
+    assert!(!b);
+
+    println!("Success!");
+}
+
+7.🌟
+fn main() {
+    let x: f64 = 1.0;
+
+    assert_eq!(x + 0.1, 1.1);
+
+    println!("Success!");
+}
+
+8.🌟🌟 Make it work in two distinct ways
+fn main() {
+    let a = 0.1f32;
+    let b = 0.2f32;
+
+    assert!((a + b - 0.3).abs() < f32::EPSILON);
+
+    println!("Success!");
+}
+
+Range
+9.🌟🌟 Two goals: 1. Modify assert! to make it work 2. Make println! output list of numbers between 97 and 122
+fn main() {
+    for c in 'a'..('z' as u8 + 1) as char {
+        print!("{}", c);
+    }
+    println!();
+}
+
+10.🌟🌟
+
+fn main() {
+    for i in 1..5 {
+        print!("{} ", i);
+    }
+    println!();
+
+    for j in 1..=5 {
+        print!("{} ", j);
+    }
+    println!();
+}
+
+Computations
+11.🌟
+fn main() {
+    let a = 5;
+    let b = 3;
+
+    // Арифметика
+    assert_eq!(a + b, 8);
+    assert_eq!(a - b, 2);
+    assert_eq!(a * b, 15);
+    assert_eq!(a / b, 1);
+    assert_eq!(a % b, 2);
+
+    // Логіка
+    assert!(a > b && b < a);
+    assert!(a == 5 || b == 0);
+    assert!(!(a < b));
+
+    println!("Success!");
+}
+
+
+4.2 Char, Bool and Unit
+Char
+1.🌟
+
+use std::mem::size_of_val;
+
+fn main() {
+    let c1 = 'a';
+    let c2 = '中';
+
+    assert_eq!(size_of_val(&c1), 4);
+    assert_eq!(size_of_val(&c2), 4);
+
+    println!("Success!");
+}
+
+2.🌟
+
+fn main() {
+    let c1 = '中'; // Тепер це char
+    print_char(c1);
+}
+
+fn print_char(c: char) {
+    println!("{}", c);
+}
+
+Bool
+
+3.🌟
+fn main() {
+    let t = true;
+    let f = false;
+
+    assert_eq!(t && f, false);
+    assert_eq!(t || f, true);
+    assert_eq!(!t, false);
+
+    println!("Success!");
+}
+
+4.🌟
+fn main() {
+    let v = implicitly_ret_unit();
+    assert_eq!(v, ()); // unit
+
+    println!("Success!");
+}
+
+fn implicitly_ret_unit() {
+    println!("This function returns unit by default");
+}
+
+Unit type
+5.🌟🌟
+se std::mem::size_of_val;
+
+fn main() {
+    let unit = ();
+    assert_eq!(size_of_val(&unit), 0); // unit займає 0 байт
+
+    println!("Success!");
+}
+
+6.🌟🌟 What's the size of the unit type?
+
+fn main() {
+    print_char('R');
+    check_bool(true);
+    let u = return_unit();
+    assert_eq!(u, ());
+    println!("Success!");
+}
+
+// char
+fn print_char(c: char) {
+    println!("{}", c);
+}
+
+// bool
+fn check_bool(b: bool) {
+    if b {
+        println!("It's true!");
+    } else {
+        println!("It's false!");
+    }
+}
+
+// unit
+fn return_unit() -> () {
+    println!("Returning unit");
+}
+
+
+4.3 Statements and Expressions
+Examples
+fn main() {
+    let x = 5u32;
+
+    let y = {
+        let x_squared = x * x;
+        let x_cube = x_squared * x;
+
+        // This expression will be assigned to `y`
+        x_cube + x_squared + x
+    };
+
+    let z = {
+        // The semicolon suppresses this expression and `()` is assigned to `z`
+        2 * x;
+    };
+
+    println!("x is {:?}", x);
+    println!("y is {:?}", y);
+    println!("z is {:?}", z);
+}
+
+Exercises
+1.🌟🌟
+fn main() {
+    let v = {
+        let mut x = 1;
+        x += 2; // statement
+        x        // expression — повертає x
+    };
+
+    assert_eq!(v, 3);
+
+    println!("Success!");
+}
+
+2.🌟
+fn main() {
+    let v = {
+        let x = 3; // statement
+        x           // expression повертає 3
+    };
+
+    assert!(v == 3);
+
+    println!("Success!");
+}
+
+3.🌟
+fn main() {
+    let s = sum(1, 2);
+    assert_eq!(s, 3);
+
+    println!("Success!");
+}
+
+fn sum(x: i32, y: i32) -> i32 {
+    x + y  // останній рядок без ; → повертає значення функції
+}
+
+
+4.4 Functions
+1.🌟🌟🌟
+
+fn main() {
+    let (x, y) = (1, 2);
+    let s = sum(x, y);
+
+    assert_eq!(s, 3);
+    println!("Success!");
+}
+
+fn sum(x: i32, y: i32) -> i32 {
+    x + y
+}
+
+2.🌟
+fn main() {
+    print();
+}
+
+fn print() {
+    println!("Success!");
+}
+
+3.🌟🌟🌟
+fn return_number() -> i32 {
+    42
+}
+
+fn main() {
+    let x = return_number(); // ok
+    println!("{}", x);
+}
+
+
+Diverging functions
+Diverging functions never return to the caller, so they may be used in places where a value of any type is expected.
+
+4.🌟🌟
+fn main() {
+    // При tp == 1, маємо отримати Some(42)
+    println!("{:?}", get_option(1));
+}
+
+// Функція повертає Option<i32> або ніколи не повертає
+fn get_option(tp: u8) -> Option<i32> {
+    match tp {
+        1 => {
+            return Some(42); // повертаємо Some значення
+        }
+        _ => {
+            // Викликаємо дівергуючу функцію — вона ніколи не повертає
+            never_return_fn()
+        }
+    }
+}
+
+// ІМПЛЕМЕНТАЦІЯ never_return_fn() -> !
+// Ви можете використовувати будь‑який з трьох варіантів:
+
+// 1. Через panic!
+fn never_return_fn() -> ! {
+    panic!("This function never returns!");
+}
+
+// 2. Через нескінченний цикл
+/*
+fn never_return_fn() -> ! {
+    loop {}
+}
+*/
+
+// 3. Через unimplemented!() або todo!()
+/*
+fn never_return_fn() -> ! {
+    unimplemented!()
+}
+*/
+
+5.🌟🌟
+fn main() {
+    let b = false;
+
+    let _v = match b {
+        true => 1,
+        false => {
+            println!("Success!");
+            panic!("we have no value for `false`, but we can panic");
+        }
+    };
+
+    println!("Exercise Failed if printing out this line!");
+}
+
+
+
+
